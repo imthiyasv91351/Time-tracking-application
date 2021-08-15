@@ -1,57 +1,89 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title>Track working time</title>
-      <link rel="stylesheet" href="style.css">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-   </head>
-   <body>
-      <div class="main">
-         <div class="nav-bar">
-            <a href="https://www.tarento.com/"><img src="images/logo.png" alt="" class="logo"></a>
-            <ul>
-               <li><a href="https://kronos.tarento.com/login">Home</a></li>
-               <li><a href="https://www.tarento.com/about">About</a></li>
-               <li><a href="https://www.tarento.com/services">Services</a></li>
-               <li><a href="https://www.tarento.com/careers">Careers</a></li>
-               <li><a href="https://www.tarento.com/contact">Contact</a></li>
-            </ul>
-         </div>
-         <div class="content">
-            <h1>Track working time</h1>
-            <form action="/action_page.php">
-               <div class="drop-down">
-                  <label  for="employee-select"></label>
-                  <select name="employee" id="employee-select">
-                  <option value="">Select an employee</option>
-                  <option value="employee1">Employee 1</option>
-                  <option value="employee2">Employee 2</option>
-                  <option value="employee3">Employee 3</option>
-                  <option value="employee4">Employee 4</option>
-                  <option value="employee5">Employee 5</option>
-                  <option value="employee6">Employee 6</option>
-                </select>
-                </div>
-                <br>
-                <div class="date">
-                  <label for="start">Start date:</label>
-                  <input type="date" id="start" name="trip-start" value="2021-08-16" min="2010-09-16" max="2022-12-31">
-                  &nbsp &nbsp &nbsp &nbsp
-                  <label for="end">End date:</label>
-                  <input type="date" id="end" name="trip-start" value="2021-08-16" min="2010-09-16" max="2022-12-31">
-                </div>
-                <br>
-                <button type="button" class="btn btn-outline-light">Track</button>
-             </form>           
-         </div>
-      </div>
-      <div class="footer">
-        <a class="footer-link" href="https://www.linkedin.com/company/tarento-group/mycompany/">LinkedIn</a>
-        <a class="footer-link" href="https://twitter.com/tarentogroup">Twitter</a>
-        <a class="footer-link" href="https://www.tarento.com/">Website</a>
-        <p class="copyright">All rights reserved © 2021 Tarento Technologies.</p>
-      </div>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-   </body>
+	<head>
+		<meta charset="utf-8" />
+		<title>Track working time</title>
+		<link rel="stylesheet" href="style.css" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+			crossorigin="anonymous"
+		/>
+	</head>
+	<body>
+		<div class="main">
+			<div class="nav-bar">
+				<a href="https://www.tarento.com/"
+					><img src="images/logo.png" alt="" class="logo"
+				/></a>
+				<ul>
+					<li><a href="https://kronos.tarento.com/login">Home</a></li>
+					<li><a href="https://www.tarento.com/about">About</a></li>
+					<li><a href="https://www.tarento.com/services">Services</a></li>
+					<li><a href="https://www.tarento.com/careers">Careers</a></li>
+					<li><a href="https://www.tarento.com/contact">Contact</a></li>
+				</ul>
+			</div>
+			<div class="content">
+				<h1>Track working time</h1>
+				<div>
+					<div class="drop-down">
+						<label for="employee-select"></label>
+						<select name="employee" id="employee-select">
+							<option value="">Select an employee</option>
+						</select>
+					</div>
+					<br />
+					<div class="date">
+						<label for="start">Start date:</label>
+						<input
+							type="date"
+							id="ipStartDate"
+							name="trip-start"
+							value="2021-08-16"
+							min="2010-09-16"
+							max="2022-12-31"
+						/>
+						&nbsp &nbsp &nbsp &nbsp
+						<label for="end">End date:</label>
+						<input
+							type="date"
+							id="ipEndDate"
+							name="trip-start"
+							value="2021-08-16"
+							min="2010-09-16"
+							max="2022-12-31"
+						/>
+					</div>
+					<br />
+					<button type="button" id="btnTrack" class="btn btn-outline-light">Track</button>
+				</div>
+			</div>
+         <div class="card" style="width: 18rem; display: none;" id="resultCard">
+            <div class="card-body">
+              <h5 class="card-title" id="vtName">3 - Misha</h5>
+              <p class="card-text" id="vtHours">Total Hours = 10</p>
+              <button class="btn btn-primary" id="btnCheck">Check Again</button>
+            </div>
+          </div>
+		</div>
+		<div class="footer">
+			<a
+				class="footer-link"
+				href="https://www.linkedin.com/company/tarento-group/mycompany/"
+				>LinkedIn</a
+			>
+			<a class="footer-link" href="https://twitter.com/tarentogroup">Twitter</a>
+			<a class="footer-link" href="https://www.tarento.com/">Website</a>
+			<p class="copyright">All rights reserved © 2021 Tarento Technologies.</p>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+			crossorigin="anonymous"
+		></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="./index.js"></script>
+	</body>
 </html>
