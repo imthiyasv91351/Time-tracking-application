@@ -20,28 +20,30 @@
          </div>
          <div class="content">
             <h1>Track working time</h1>
-            <div class="drop-down">
-              <label  for="pet-select"></label>
-              <select name="pets" id="pet-select">
-              <option value="">Select an employee</option>
-              <option value="dog">Employee 1</option>
-              <option value="cat">Employee 2</option>
-              <option value="hamster">Employee 3</option>
-              <option value="parrot">Employee 4</option>
-              <option value="spider">Employee 5</option>
-              <option value="goldfish">Employee 6</option>
-            </select>
-            </div>
-            <br>
-            <div class="date">
-              <label for="start">Start date:</label>
-              <input type="date" id="start" name="trip-start" value="2021-08-16" min="2010-09-16" max="2022-12-31">
-              &nbsp &nbsp &nbsp &nbsp
-              <label for="end">End date:</label>
-              <input type="date" id="end" name="trip-start" value="2021-08-16" min="2010-09-16" max="2022-12-31">
-            </div>
-            <br>
-            <button type="button" class="btn btn-outline-light">Track</button>
+            <form action="/action_page.php">
+               <div class="drop-down">
+                  <label  for="employee-select"></label>
+                  <select name="employee" id="employee-select">
+                  <option value="">Select an employee</option>
+                  <option value="employee1">Employee 1</option>
+                  <option value="employee2">Employee 2</option>
+                  <option value="employee3">Employee 3</option>
+                  <option value="employee4">Employee 4</option>
+                  <option value="employee5">Employee 5</option>
+                  <option value="employee6">Employee 6</option>
+                </select>
+                </div>
+                <br>
+                <div class="date">
+                  <label for="start">Start date:</label>
+                  <input type="date" id="start" name="trip-start" value="2021-08-16" min="2010-09-16" max="2022-12-31">
+                  &nbsp &nbsp &nbsp &nbsp
+                  <label for="end">End date:</label>
+                  <input type="date" id="end" name="trip-start" value="2021-08-16" min="2010-09-16" max="2022-12-31">
+                </div>
+                <br>
+                <button type="button" class="btn btn-outline-light">Track</button>
+             </form>           
          </div>
       </div>
       <div class="footer">
