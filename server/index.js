@@ -1,17 +1,22 @@
-//declare express
-const express = require('express');
+// requiring or declaring express 
+const express = require("express");
 
-//initialize express
+// requiring cors for bypass cors error
+const cors = require("cors");
+
+// initializing express
 const app = express();
+
+app.use(cors());
 
 const employees = [
 	{
 		eid: 1,
-		name: 'vrinda',
+		name: 'imthiyas',
 	},
 	{
 		eid: 2,
-		name: 'imthiyas',
+		name: 'rashad',
 	},
 	{
 		eid: 3,
@@ -23,7 +28,7 @@ const employees = [
 	},
 ];
 
-const worklog = [
+const workLog = [
 	{
 		eid: 1,
 		date: '2021-08-14',
@@ -66,38 +71,42 @@ const worklog = [
 	},
 ];
 
-app.get('/get-employee', (req, res) => {
-
+//handle the get request in root end point
+app.get('/get-employee', (req, res) =>{
     console.log(req.query);
 
-    //const{employee, start, end} = req.query;
-    
-    // const employee = req.query.employee;
-    // const start = req.query.start;
-    // const end = req.query.end;
+    // const{employee, start, end} = req.query;
+
+    // const employee =req.query.employee;
+    // const start =req.query.start;
+    // const end =req.query.end;
 
     res.status(200).json({
-        //response: as we give inputs in frontend
+        // respond as what we have to catch
         employees
     });
 })
 
-// app.get('/', (req, res) => {
-
+//handle the get request in root end point
+// app.get('/get-employee', (req, res) =>{
 //     console.log(req.query);
-//     //const{employee, start, end} = req.query;
-//     const employee = req.query.employee;
-//     const start = req.query.start;
-//     const end = req.query.end;
+
+//     // const{employee, start, end} = req.query;
+
+//     const employee =req.query.employee;
+//     const start =req.query.start;
+//     const end =req.query.end;
 
 //     res.status(200).json({
-//         //response: as we give inputs in frontend
+//         // respond as what we have to catch
 //         employee,
 //         start,
 //         end
 //     });
 // })
 
-app.listen(5000, () =>  {
+
+// listening http server
+app.listen(5000, () => {
     console.log("server started running on port 5000");
 });
