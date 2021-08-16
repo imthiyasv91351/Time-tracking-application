@@ -9,7 +9,10 @@ const vtHours = document.getElementById('vtHours');
 const btnCheck = document.getElementById('btnCheck');
 
 document.addEventListener('DOMContentLoaded', function () {
-	
+    console.log('loaded');
+    fetch('http://localhost:5000/get-employee')
+        .then(response => response.json())
+        .then(data => console.log(data));
 });
 
 btnTrack.onclick = () => {
