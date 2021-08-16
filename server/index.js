@@ -1,13 +1,7 @@
-// requiring or declaring express 
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
+const dbService = require('./dbService');
 
-// requiring cors for bypass cors error
-const cors = require("cors");
-const { timeLog } = require("console");
-
-const dbService = require("./dbServices");
-
-// initializing express
 const app = express();
 
 app.use(cors());
@@ -15,11 +9,11 @@ app.use(cors());
 const employees = [
 	{
 		eid: 1,
-		name: 'imthiyas',
+		name: 'shaheem',
 	},
 	{
 		eid: 2,
-		name: 'rashad',
+		name: 'imthyas',
 	},
 	{
 		eid: 3,
@@ -31,7 +25,7 @@ const employees = [
 	},
 ];
 
-const workLog = [
+const worklog = [
 	{
 		eid: 1,
 		date: '2021-08-14',
@@ -74,81 +68,71 @@ const workLog = [
 	},
 ];
 
-const formatDate = (timeStamp) => {
-    var d = new Date(timeStamp),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+const formatDate = (timestamp) => {
+	var d = new Date(timestamp),
+		month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate(),
+		year = d.getFullYear();
 
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
+	if (month.length < 2) month = '0' + month;
+	if (day.length < 2) day = '0' + day;
 
-    return [year, month, day].join('-');
-}
+	return [year, month, day].join('-');
+};
 
-//handle the get request in root end point
-app.get('/get-employee', (req, res) =>{
-    console.log(req.query);
+app.get('/api/get-employees', async (req, res) => {
+	const db = dbService.getDbServiceInstance();
 
-    // const{employee, start, end} = req.query;
+	let employees;
+	try {
+		employees = await db.getAllEmployees();
+	} catch (error) {
+		res.status(500).json({
+			error: error,
+		});
+	}
 
-    // const employee =req.query.employee;
-    // const start =req.query.start;
-    // const end =req.query.end;
+	res.status(200).json({
+		employees,
+	});
+});
 
-    res.status(200).json({
-        // respond as what we have to catch
-        employees
-    });
-})
+app.get('/api/track-time', async (req, res) => {
+	const { eid, start, end } = req.query;
 
-// handle the get request in root end point
-app.get('/time-track', (req, res) =>{
-    console.log(req.query);
+	const db = dbService.getDbServiceInstance();
 
-    const {eid, start, end} = req.query;
+	const formattedStart = formatDate(Number(start));
+	const formattedEnd = formatDate(Number(end));
 
-    console.log(eid, start, end);
-    // const eid =req.query.eid;
-    // const start =req.query.start;
-    // const end =req.query.end;
+	let worklog;
+	try {
+		worklog = await db.getEmployeeWork(eid, formattedStart, formattedEnd);
+	} catch (error) {
+		res.status(500).json({
+			error: error,
+		});
+	}
 
-    let employeeInd = -1;
-    employeeInd = employees.findIndex((employee) => employee.eid === eid);
+	const hoursJsonData = JSON.parse(JSON.stringify(worklog));
 
-    console.log(employee.eid);
-    if(employeeInd === -1){
-        return res.status(404).json({
-            message: 'employee not found'
-        })
-    }
+	let employees;
+	try {
+		employees = await db.getEmployeeByEid(eid);
+	} catch (error) {
+		res.status(500).json({
+			error: error,
+		});
+	}
 
-    let hours = 0;
+    const employeeJsonData = JSON.parse(JSON.stringify(employees));
 
-    // const start_timeStamp = Number(new Date(start));
-    // const end_timeStamp = Number(new Date(end));
+	res.status(200).json({
+		hours: hoursJsonData[0].hours,
+        employee: employeeJsonData[0]
+	});
+});
 
-    for (let i = 0; i < workLog.length; i++) {
-        const workLog = workLog[i];
-        if (tempLog.eid === Number(eid)) {  
-            const tempDate = Number(new Date(tempLog.date));   
-            if (tempDate >= start && tempDate <= end) {
-                hours += tempLog.time;
-            }    
-        }
-        
-    }
-
-    res.status(200).json({
-        // respond as what we have to catch
-        hours
-    });
-})
-
-
-// listening http server
 app.listen(5000, () => {
-    console.log("server started running on port 5000");
+	console.log('server started running on port 5000');
 });

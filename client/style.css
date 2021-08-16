@@ -111,3 +111,10 @@ label {
 .footer a:hover {
 	color: #eaf6f6;
 }
+
+.card {
+  position: absolute;
+  left: 43%;
+  top: 40%; 
+  text-align: center;
+}

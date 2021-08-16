@@ -24,7 +24,7 @@ class DbService {
   async getAllEmployees() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = "SELECT * FROM employee;";
+        const query = "SELECT * FROM employees;";
 
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
@@ -40,7 +40,7 @@ class DbService {
   async getEmployeeByEid(eid) {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = `SELECT * FROM employee WHERE eid=${eid};`;
+        const query = `SELECT * FROM employees WHERE eid=${eid};`;
 
         connection.query(query, (err, results) => {
           if (err) reject(new Error(err.message));
